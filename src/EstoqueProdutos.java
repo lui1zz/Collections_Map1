@@ -18,7 +18,7 @@ public class EstoqueProdutos {
 
     public double calcularValorTotalEstoque() {
         double valorTotalEstoque = 0d;
-        if (estoqueProdutosMap.isEmpty()) {
+        if (!estoqueProdutosMap.isEmpty()) {
             for(Produto p: estoqueProdutosMap.values()) {
                 valorTotalEstoque += p.getQuantidade() * p.getPreco();
             }
@@ -27,15 +27,26 @@ public class EstoqueProdutos {
     }
 
     public Produto ProdutoMaisCaro(){
-        Produto produtoMaiasCaro = null;
+        Produto produtoMaisCaro = null;
         double maiorPreco = Double.MIN_VALUE;
-        if (estoqueProdutosMap.isEmpty()) {
+        if (!estoqueProdutosMap.isEmpty()) {
             for (Produto p : estoqueProdutosMap.values()) {
                 if(p.getPreco() > maiorPreco) {
-                    produtoMaiasCaro = p;
+                    produtoMaisCaro = p;
                 }
             }
         }
-        return ProdutoMaisCaro();
+        return produtoMaisCaro;
+    }
+
+    public static void main(String[] args) {
+        EstoqueProdutos estoque = new EstoqueProdutos();
+        estoque.exibirProdutos();
+
+        estoque.adicionarPoduto(1, "sabao", 2, 3.5);
+        estoque.adicionarPoduto(3, "agua", 2, 13.5);
+        estoque.exibirProdutos();
+        System.out.println(estoque.calcularValorTotalEstoque());
+        System.out.println(estoque.ProdutoMaisCaro());
     }
 }
